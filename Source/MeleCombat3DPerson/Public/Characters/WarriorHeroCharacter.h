@@ -23,6 +23,10 @@ class MELECOMBAT3DPERSON_API AWarriorHeroCharacter : public AWarriorBaseCharacte
 	
 public:
 	AWarriorHeroCharacter();
+	//~ Begin PawnCombatInterface Interface.
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	//~ End PawnCombatInterface Interface
+
 
 protected:
 	// ~Begin APawn Interface.

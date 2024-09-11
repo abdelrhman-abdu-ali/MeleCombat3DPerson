@@ -7,9 +7,11 @@
 #include "WarriorGameplayTags.h"
 #include "WarriorDebugHelper.h"
 
+#include "WarriorDebugHelper.h"
+
 AWarriorHeroWeapon* UHeroCombatComponent::GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag) const
 {
-    return Cast<AWarriorHeroWeapon>(GetCharacterCarriedWeaponByTag(InWeaponTag));
+	return Cast<AWarriorHeroWeapon>(GetCharacterCarriedWeaponByTag(InWeaponTag));
 }
 
 AWarriorHeroWeapon* UHeroCombatComponent::GetHeroCurrentEquippedWeapon() const
@@ -21,10 +23,9 @@ float UHeroCombatComponent::GetHeroCurrentEquippWeaponDamageAtLevel(float InLeve
 {
 	return GetHeroCurrentEquippedWeapon()->HeroWeaponData.WeaponBaseDamage.GetValueAtLevel(InLevel);
 }
+
 void UHeroCombatComponent::OnHitTargetActor(AActor* HitActor)
 {
-  //  Debug::Print(GetOwningPawn()->GetActorNameOrLabel() + TEXT(" hit ") + HitActor->GetActorNameOrLabel(), FColor::Green);
-
 	if (OverlappedActors.Contains(HitActor))
 	{
 		return;
@@ -41,9 +42,19 @@ void UHeroCombatComponent::OnHitTargetActor(AActor* HitActor)
 		WarriorGameplayTags::Shared_Event_MeleeHit,
 		Data
 	);
+
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
+		GetOwningPawn(),
+		WarriorGameplayTags::Player_Event_HitPause,
+		FGameplayEventData()
+	);
 }
 
 void UHeroCombatComponent::OnWeaponPulledFromTargetActor(AActor* InteractedActor)
 {
-    Debug::Print(GetOwningPawn()->GetActorNameOrLabel() + TEXT("'s weapon pulled from ") + InteractedActor->GetActorNameOrLabel(), FColor::Red);
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
+		GetOwningPawn(),
+		WarriorGameplayTags::Player_Event_HitPause,
+		FGameplayEventData()
+	);
 }

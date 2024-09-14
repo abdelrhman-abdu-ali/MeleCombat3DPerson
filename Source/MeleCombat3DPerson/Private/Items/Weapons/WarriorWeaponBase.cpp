@@ -4,6 +4,7 @@
 #include "Items/Weapons/WarriorWeaponBase.h"
 #include "Components/BoxComponent.h"
 #include "WarriorDebugHelper.h"
+#include "WarriorFunctionLibrary.h"
 
 // Sets default values
 AWarriorWeaponBase::AWarriorWeaponBase()
@@ -30,7 +31,7 @@ void AWarriorWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* Overlap
 
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (WeaponOwningPawn != HitPawn)
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn, HitPawn))
 		{
 			//Debug::Print(GetName() + TEXT(" begin overlap with ") + HitPawn->GetName(), FColor::Green);
 			OnWeaponHitTarget.ExecuteIfBound(OtherActor);
@@ -49,10 +50,11 @@ void AWarriorWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* Overlappe
 
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (WeaponOwningPawn != HitPawn)
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn, HitPawn))
 		{
 			//Debug::Print(GetName() + TEXT(" end overlap with ") + HitPawn->GetName(), FColor::Red);
-			OnWeaponPulledFromTarget.ExecuteIfBound(OtherActor);
+			OnWeaponHitTarget.ExecuteIfBound(OtherActor);
+
 
 		}
 

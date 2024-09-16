@@ -9,7 +9,7 @@ public class MeleCombat3DPerson : ModuleRules
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" , "GameplayTags",
-            "EnhancedInput", "GameplayTasks", "AnimGraphRuntime","MotionWarping"});
+            "EnhancedInput", "GameplayTasks", "AnimGraphRuntime","MotionWarping","Niagara"});
 
         PrivateDependencyModuleNames.AddRange(new string[] {  });
 

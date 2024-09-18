@@ -9,6 +9,8 @@
 #include "Components/UI/EnemyUIComponent.h"
 #include "Components/WidgetComponent.h"
 #include "WarriorWidgetBase.h"
+#include "GameModes/WarriorBaseGameMode.h"
+
 #include "WarriorDebugHelper.h"
 
 AWarriorEnemyCharacter::AWarriorEnemyCharacter()
@@ -67,6 +69,7 @@ void AWarriorEnemyCharacter::InitEnemyStartUpData()
 	{
 		return;
 	}
+	
 
 	UAssetManager::GetStreamableManager().RequestAsyncLoad(
 		CharacterStartUpData.ToSoftObjectPath(),
@@ -76,6 +79,7 @@ void AWarriorEnemyCharacter::InitEnemyStartUpData()
 				if (UDataAsset_StartUpDataBase* LoadedData = CharacterStartUpData.Get())
 				{
 					LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
+
 
 					//Debug::Print(TEXT("Enemy Start Up Data Loaded"), FColor::Green);
 				}

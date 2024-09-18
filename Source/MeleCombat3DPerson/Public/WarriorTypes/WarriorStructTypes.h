@@ -4,7 +4,6 @@
 
 #include "GameplayTagContainer.h"
 #include "ScalableFloat.h"
-
 #include"WarriorStructTypes.generated.h"
 
 class UWarriorHeroLinkedAnimeLayer;
